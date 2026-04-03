@@ -1,0 +1,27 @@
+{
+  "realm": "app",
+  "enabled": true,
+
+  "clients": [
+    {
+      "clientId": "tenant-frontend",
+      "publicClient": true,
+      "redirectUris": ["*"],
+      "webOrigins": ["*"]
+    },
+    {
+      "clientId": "enduser-frontend",
+      "publicClient": true,
+      "redirectUris": ["*"],
+      "webOrigins": ["*"]
+    },
+    {
+      "clientId": "backend-service",
+      "serviceAccountsEnabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "backend-secret",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false
+    }
+  ]
+}

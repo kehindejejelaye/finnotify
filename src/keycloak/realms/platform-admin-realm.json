@@ -1,0 +1,26 @@
+{
+  "realm": "platform-admin",
+  "enabled": true,
+  "roles": {
+    "realm": [
+      { "name": "platform_super_admin" },
+      { "name": "platform_admin" }
+    ]
+  },
+  "users": [
+    {
+      "username": "superadmin",
+      "enabled": true,
+      "email": "admin@finnotify.com",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "SuperAdmin123!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["platform_super_admin"]
+    }
+  ]
+}

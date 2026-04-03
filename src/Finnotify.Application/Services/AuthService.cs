@@ -18,11 +18,9 @@ public class AuthService : IAuthService
             var tokenResponse = await _keycloakClient.GetUserTokenAsync(
                 request.Email, request.Password, ct);
 
-            var backendToken = JwtHelper.GenerateToken(tokenResponse, request.Email);
-
             var response = new LoginResponse
             {
-                AccessToken = backendToken,
+                AccessToken = tokenResponse.AccessToken,
                 ExpiresIn = tokenResponse.ExpiresIn
             };
 

@@ -71,7 +71,11 @@ public abstract class GenericHttpClient<TClient>
 
             throw new HttpRequestException($"Request to {url} failed with status {response.StatusCode}");
         }
+        var result = await response.Content.ReadFromJsonAsync<TResponse>();
+    
+        // The @ symbol tells Serilog to destructure the object instead of calling .ToString()
+        _logger.LogInformation("Response from {Url}: {@Result}", url, result);
 
-        return await response.Content.ReadFromJsonAsync<TResponse>();
+        return result;
     }
 }

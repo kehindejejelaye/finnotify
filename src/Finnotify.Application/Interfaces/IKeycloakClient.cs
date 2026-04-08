@@ -9,7 +9,7 @@ public interface IKeycloakClient
     /// </summary>
     /// <param name="ct">Cancellation token</param>
     /// <returns>Access token string</returns>
-    Task<string> GetClientTokenAsync(CancellationToken ct = default);
+    Task<string> GetClientTokenAsync(KeycloakRealm realm, CancellationToken ct = default);
 
     /// <summary>
     /// Creates a user in Keycloak
@@ -17,7 +17,7 @@ public interface IKeycloakClient
     /// <param name="accessToken">Bearer token</param>
     /// <param name="payload">User payload</param>
     /// <param name="ct">Cancellation token</param>
-    Task CreateUserAsync(string accessToken, KeycloakUserCreateRequest payload, CancellationToken ct = default);
+    Task CreateUserInAppRealmAsync(string accessToken, KeycloakUserCreateRequest payload, CancellationToken ct = default);
 
-    Task<KeycloakTokenResponse> GetUserTokenAsync(string username, string password, CancellationToken ct = default);
+    Task<KeycloakTokenResponse> GetUserTokenAsync(KeycloakRealm realm, string username, string password, CancellationToken ct = default);
 }

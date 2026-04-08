@@ -11,11 +11,11 @@ public class AuthService : IAuthService
         _keycloakClient = keycloakClient;
     }
 
-    public async Task<Result<LoginResponse>> LoginAsync(LoginRequest request, CancellationToken ct)
+    public async Task<Result<LoginResponse>> LoginAsync(KeycloakRealm realm, LoginRequest request, CancellationToken ct)
     {
         try
         {
-            var tokenResponse = await _keycloakClient.GetUserTokenAsync(
+            var tokenResponse = await _keycloakClient.GetUserTokenAsync(realm,
                 request.Email, request.Password, ct);
 
             var response = new LoginResponse

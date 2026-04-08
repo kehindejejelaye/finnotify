@@ -1,6 +1,8 @@
 using System.Security.Claims;
 using System.Text.Json;
+using Finnotify.Application;
 using Finnotify.Application.ConfigurationOptions;
+using Finnotify.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -67,15 +69,23 @@ builder.Services.AddAuthorization(options =>
 
 });
 
+builder.Services
+    .AddInfrastructureServices(builder.Configuration)
+    .AddApplicationServices();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "v1");
+    });
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -5,15 +5,6 @@
     <Project Path="src/Finnotify.Domain/Finnotify.Domain.csproj" />
     <Project Path="src/Finnotify.Infrastructure/Finnotify.Infrastructure.csproj" />
   </Folder>
-  <Folder Name="/src/ExternalServices/">
-    <Project Path="src/ExternalServices/Finnotify.ExternalServices.csproj" />
-  </Folder>
-  <Folder Name="/src/Messaging/">
-    <Project Path="src/Messaging/Finnotify.Messaging.csproj" />
-  </Folder>
-  <Folder Name="/src/Persistence/">
-    <Project Path="src/Persistence/Finnotify.Persistence.csproj" />
-  </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Finnotify.ArchitectureTests/Finnotify.ArchitectureTests.csproj" />
     <Project Path="tests/Finnotify.IntegrationTests/Finnotify.IntegrationTests.csproj" />

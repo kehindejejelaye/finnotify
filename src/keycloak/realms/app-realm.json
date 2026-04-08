@@ -2,16 +2,20 @@
   "realm": "app",
   "enabled": true,
 
+  "roles": {
+    "realm": [
+      { "name": "tenant_owner" },
+      { "name": "tenant_admin" },
+      { "name": "tenant_user" }
+    ]
+  },
+
   "clients": [
     {
       "clientId": "tenant-frontend",
       "publicClient": true,
-      "redirectUris": ["*"],
-      "webOrigins": ["*"]
-    },
-    {
-      "clientId": "enduser-frontend",
-      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
       "redirectUris": ["*"],
       "webOrigins": ["*"]
     },

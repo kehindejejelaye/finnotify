@@ -15,14 +15,21 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginRequest request, CancellationToken ct)
+    [HttpPost("platform/login")]
+    public async Task<IActionResult> PlatformLogin([FromBody] LoginRequest request, CancellationToken ct)
     {
-        var result = await _authService.LoginAsync(request, ct);
+        return await Login(KeycloakRealm.Platform, request, ct);
+    }
 
-        if (result.IsSuccess)
-            return Ok(result);
+    [HttpPost("app/login")]
+    public async Task<IActionResult> AppLogin([FromBody] LoginRequest request, CancellationToken ct)
+    {
+        return await Login(KeycloakRealm.App, request, ct);
+    }
 
-        return Unauthorized(result);
+    private async Task<IActionResult> Login(KeycloakRealm realm, LoginRequest request, CancellationToken ct)
+    {
+        var result = await _authService.LoginAsync(realm, request, ct);
+        return result.IsSuccess ? Ok(result) : Unauthorized(result);
     }
 }

@@ -10,10 +10,10 @@ namespace Finnotify.Infrastructure;
 
 public static class InfrastructureExtensions
 {
-    public static ServiceCollection AddInfrastructureServices(this ServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<KeycloakOptions>(configuration.GetSection(KeycloakOptions.SECTION));
-
+        services.AddScoped<IKeycloakClient, KeycloakClient>();
         services.AddHttpClient<IKeycloakClient, KeycloakClient>((serviceProvider, client) =>
         {
             var options = serviceProvider

@@ -54,6 +54,22 @@ services:
     volumes:
       - ./src/keycloak/realms:/opt/keycloak/data/import
 
+  # =========================
+  # Mailpit - For Testing Emails
+  # =========================
+  mailpit: 
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    restart: unless-stopped
+    ports: 
+      - "1025:1025"
+      - "8025:8025"
+    volumes: 
+      - mailpit_data:/data
+    environment: 
+      MP_DATABASE: /data/mailpit.db
+
 volumes:
   postgres_data:
   keycloak_db_data:
+  mailpit_data:

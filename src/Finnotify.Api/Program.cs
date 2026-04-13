@@ -4,7 +4,7 @@ using Finnotify.Application;
 using Finnotify.Application.ConfigurationOptions;
 using Finnotify.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using Finnotify.Api.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,15 +59,7 @@ builder.Services
         };
     });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("PlatformSuperAdmin", policy =>
-        policy.RequireRole("platform_super_admin"));
-
-    options.AddPolicy("PlatformAdmin", policy =>
-        policy.RequireRole("platform_admin"));
-
-});
+builder.Services.AddPlatformAuthorization();
 
 builder.Services
     .AddInfrastructureServices(builder.Configuration)

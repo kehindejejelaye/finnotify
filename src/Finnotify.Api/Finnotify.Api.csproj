@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Finnotify.Infrastructure\Finnotify.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Authorization\" />
+  </ItemGroup>
+
 </Project>

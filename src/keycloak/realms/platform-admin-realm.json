@@ -1,0 +1,47 @@
+{
+  "realm": "platform-admin",
+  "enabled": true,
+
+  "roles": {
+    "realm": [
+      { "name": "platform_super_admin" },
+      { "name": "platform_admin" }
+    ]
+  },
+
+  "clients": [
+    {
+      "clientId": "platform-admin-frontend",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": ["*"],
+      "webOrigins": ["*"]
+    },
+    {
+      "clientId": "platform-backend",
+      "serviceAccountsEnabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "platform-secret",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false
+    }
+  ],
+
+  "users": [
+    {
+      "username": "superadmin",
+      "enabled": true,
+      "email": "admin@finnotify.com",
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "SuperAdmin123!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["platform_super_admin"]
+    }
+  ]
+}

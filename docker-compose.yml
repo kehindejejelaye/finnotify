@@ -1,0 +1,59 @@
+services:
+  # =========================
+  # App Database
+  # =========================
+  postgres:
+    image: postgres:15
+    container_name: finnotify-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # =========================
+  # Keycloak Database
+  # =========================
+  keycloak-db:
+    image: postgres:15
+    container_name: keycloak-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${KC_DB_URL_DATABASE}
+      POSTGRES_USER: ${KC_DB_USERNAME}
+      POSTGRES_PASSWORD: ${KC_DB_PASSWORD}
+    volumes:
+      - keycloak_db_data:/var/lib/postgresql/data
+
+  # =========================
+  # Keycloak
+  # =========================
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: finnotify-keycloak
+    command: start-dev --import-realm
+    restart: always
+    depends_on:
+      - keycloak-db
+    environment:
+      KC_DB: ${KC_DB}
+      KC_DB_URL_HOST: ${KC_DB_URL_HOST}
+      KC_DB_URL_DATABASE: ${KC_DB_URL_DATABASE}
+      KC_DB_USERNAME: ${KC_DB_USERNAME}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+
+    ports:
+      - "${KEYCLOAK_PORT}:8080"
+    volumes:
+      - ./src/keycloak/realms:/opt/keycloak/data/import
+
+volumes:
+  postgres_data:
+  keycloak_db_data:

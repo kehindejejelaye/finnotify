@@ -1,0 +1,31 @@
+{
+  "realm": "app",
+  "enabled": true,
+
+  "roles": {
+    "realm": [
+      { "name": "tenant_owner" },
+      { "name": "tenant_admin" },
+      { "name": "tenant_user" }
+    ]
+  },
+
+  "clients": [
+    {
+      "clientId": "tenant-frontend",
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": ["*"],
+      "webOrigins": ["*"]
+    },
+    {
+      "clientId": "backend-service",
+      "serviceAccountsEnabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "backend-secret",
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": false
+    }
+  ]
+}
